@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Créance Client</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-list *ngIf="suc != false">
+    <ion-item>
+      <ion-label  floating>Recherche ...</ion-label>
+      <ion-input type="text" [(ngModel)]="query" (ionChange)="search_php(query)"></ion-input>
+    </ion-item>
+  </ion-list>
+  <div *ngIf="searchMode">
+    <h5 *ngIf="users.length==0" text-center class="redIcon"> <br>Désolé ! Pas de créance pour <b>{{ query }}</b></h5>
+  </div>
+
+  <ion-card *ngFor="let item of users">
+    
+
+      <ion-card-content>
+        <br><h2 text-center style="color:#aa0505;font-weight: bold"> {{ item.D_CLIENT }}</h2>
+        <b>Code client: </b>   {{ item.CLIENT }} <br>   
+        <b>Nom client: </b>   {{ item.D_CLIENT }} <br>
+        <b>Solde antérieur: </b>   {{ item.SOLDEANTBL }} <br>
+        <b>Créance: </b>   {{ item.CREANCE }} <br>
+       
+      </ion-card-content>
+
+  </ion-card>
+  <ion-infinite-scroll (ionInfinite)="loadMore($event)"  *ngIf="hasData" >
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Chargement de données en cours..." *ngIf="hasData" ></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>
+ 

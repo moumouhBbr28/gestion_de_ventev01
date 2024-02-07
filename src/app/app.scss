@@ -1,0 +1,34 @@
+* ::-webkit-scrollbar{
+  display: none;
+}
+body{
+  -webkit-user-select: text;
+  user-select: text;
+}
+
+$primary-color: #aa0505;
+$gray-color: rgba(0, 0, 0, 0.56);
+
+.redIcon {
+  color: $primary-color;
+}
+.gray{
+  color: $gray-color;
+}
+.hasErrorSty{
+  background-color: rgba(170, 0, 73, 0.24);
+}
+.ValideSty{
+  background-color: rgba(0, 0, 0, 0.11);
+}
+.tabs .tabbar {
+  background-color: #fff;
+
+}
+
+.text-properties-modal { 	background: rgba(0, 0, 0, 0.5) !important; 	padding: 20% 10% !important; 	.modal-wrapper { 		border-radius: 20px; 	} } 
+
+
+ion-label{
+  white-space:normal!important ;
+}

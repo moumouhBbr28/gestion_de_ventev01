@@ -1,0 +1,29 @@
+page-contact {
+  .padding {
+    padding: 10px;
+    padding-bottom: 0;
+  }
+
+  .lien_custom{
+    color:black;
+    text-decoration: none;
+
+  }
+  .lien_custom:hover{
+    text-decoration: underline;
+  }
+
+  .h4_cus {
+    color: $primary-color;
+    font-weight: bold;
+  }
+
+  .fs18{
+    font-size: 22px;
+    color: #3a3a3a;
+
+  }
+
+
+}
+

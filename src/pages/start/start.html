@@ -1,0 +1,41 @@
+<ion-header no-border>
+  <div text-center>
+    <img src="assets/imgs/2 - Copie.png" id="img-center">
+    <!-- <p style="color:white;font-family: Verdana, Geneva, Tahoma, sans-serif ;font-weight: 500; font-size: 16px;"> Ms Contact informatique </p> -->
+
+  </div>
+</ion-header>
+<ion-content padding>
+
+  <div text-center>
+    <h1 style="margin-top: 18px; color: #000000;font-family: TwCenMTCondensedBold ;font-size: 57px;"> IluTrade </h1>
+    <p style="color: rgb(0, 0, 0);font-family: Leelawadee ;font-size: 18px;margin-top: -20px; opacity: 0.7;"> Gestion
+      commerciale</p> <br>
+    <ion-list>
+      <ion-item style="border-top:none">
+        <ion-label color="grisClair" floating>
+          <img src="assets/imgs/user.png" width="19" height="19" />
+          Nom du client
+        </ion-label>
+        <ion-input type="text" [(ngModel)]="NAME_CL" name="NAME_CL" maxlength="16"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label color="grisClair" floating style="margin-top: -7px;">
+          <img src="assets/imgs/passw.png" width="19" height="19" item-left />
+          Clé du produit
+        </ion-label>
+        <ion-input type="text" [(ngModel)]="PRODUCT_KEY" name="PRODUCT_KEY" maxlength="39">
+        </ion-input>
+
+      </ion-item><br>
+      <button (click)="goToSeConnecter(NAME_CL,PRODUCT_KEY)" ion-button color="rougeC" class="shadow" style="border-radius: 25px;  background-image: linear-gradient(to left, #cd4f48 , #7b2011);
+    padding-left:70px;padding-right: 70px;font-family: Leelawadee ;text-transform: inherit;
+    padding-top: 25px;padding-bottom: 25px;font-size: 18px;">Entrer</button>
+      <p style="color: rgb(0, 0, 0);font-family: Leelawadee ;font-size: 16px;; opacity: 1;font-weight: 300;"> Votre
+        empreinte materiel?<a (click)="getUUID()" style="text-decoration: underline;font-weight: 500;"> Obtenir</a></p>
+    </ion-list>
+
+  </div>
+
+
+</ion-content>

@@ -1,0 +1,130 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Fiche client {{ codeClient }} </ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+ <ion-list>
+    <ion-item>
+      <ion-label floating>Nom client *</ion-label>
+      <ion-input type="text"   [(ngModel)]="client.D_CLIENT"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating> Représentant </ion-label>
+      <ion-input type="text" [(ngModel)]="client.REP_CLIENT"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Adresse de facturation (1) </ion-label>
+
+      <ion-input type="text" [(ngModel)]="client.ADRESSE"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Adresse de facturation (2) </ion-label>
+
+      <ion-input type="text" [(ngModel)]="client.ADRESSE2"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Adresse de livraison (1)</ion-label>
+      <ion-input type="text" [(ngModel)]="client.ADRESSEL1"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Adresse de livraison (2)</ion-label>
+      <ion-input type="text" [(ngModel)]="client.ADRESSEL2"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating> R.C.N°</ion-label>
+      <ion-input type="text"  [(ngModel)]="client.REGISTRE"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating> N° Article</ion-label>
+      <ion-input type="text" [(ngModel)]="client.ARTICLIMPO"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating> Mat.fiscal</ion-label>
+      <ion-input type="text" [(ngModel)]="client.IMMATFISC"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating> Tel1</ion-label>
+      <ion-input type="tel" [(ngModel)]="client.TEL1"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Tel2 </ion-label>
+      <ion-input type="tel" [(ngModel)]="client.TEL2"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating> Tel3</ion-label>
+      <ion-input type="tel" [(ngModel)]="client.TEL3"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>  Fax</ion-label>
+      <ion-input type="tel" [(ngModel)]="client.FAX"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Code postal </ion-label>
+      <ion-input type="text" [(ngModel)]="client.CODEPOSTAL"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Email </ion-label>
+      <ion-input type="text" [(ngModel)]="client.EMAIL"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Web</ion-label>
+      <ion-input type="text" [(ngModel)]="client.URL"></ion-input>
+    </ion-item>
+
+   <ion-item>
+     <ion-label floating>Pays</ion-label>
+     <ion-select [(ngModel)]="client.PAYS">
+       <ion-option value="" selected>Aucun</ion-option>
+       <ion-option *ngFor = "let e of pays_list" value="{{e.C_PAYS}}" >{{e.LEPAYS}}</ion-option>
+     </ion-select>
+   </ion-item>
+
+
+   <ion-item>
+   <ion-label floating>Ville</ion-label>
+     <ion-select [(ngModel)]="client.VILLE">
+     <ion-option value="" selected>Aucune</ion-option>
+     <ion-option *ngFor = "let e of ville_list" value="{{e.C_VILLE}}" >{{e.D_VILLE}}</ion-option>
+   </ion-select>
+ </ion-item>
+
+
+   <ion-item>
+     <ion-label floating>Forme juridique</ion-label>
+     <ion-select [(ngModel)]="client.FORME">
+       <ion-option value="" selected>Aucune</ion-option>
+       <ion-option *ngFor = "let e of formej_list" value="{{e.C_FORME}}" >{{e.D_FORME}}</ion-option>
+     </ion-select>
+   </ion-item>
+
+   <ion-item>
+     <ion-label floating>Secteur d'activité</ion-label>
+     <ion-select [(ngModel)]="client.SECTEUR">
+       <ion-option value="" selected>Aucun</ion-option>
+       <ion-option *ngFor = "let e of secteura_list" value="{{e.C_SECTEUR}}" >{{e.D_SECTEUR}}</ion-option>
+     </ion-select>
+   </ion-item>
+
+
+   <ion-item>
+     <ion-label floating>Tarifs</ion-label>
+     <ion-select [(ngModel)]="client.TYPECLIENT">
+       <ion-option value="" selected>Aucun</ion-option>
+       <ion-option *ngFor = "let e of tarifs_list" value="{{e.C_VENTE}}" >{{e.D_VENTE}}</ion-option>
+     </ion-select>
+   </ion-item>
+
+ </ion-list>
+
+
+
+  <ion-fab right bottom>
+    <button ion-fab  (click)="validerModif(client)" color="danger" ><ion-icon name="checkmark" ></ion-icon></button>
+  </ion-fab>
+</ion-content>

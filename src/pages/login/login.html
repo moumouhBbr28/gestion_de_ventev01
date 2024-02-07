@@ -1,0 +1,33 @@
+ <ion-content padding>
+  <img src="assets/imgs/login.png"  id="img-center" (click)="goToAccueilLogin()"/>
+  <ion-list>
+    <ion-item style="border-top:none">
+      <ion-label color="grisClair" floating>
+        <img src="assets/imgs/user.png" width="19" height="19"/>
+        Nom d'utilisateur
+      </ion-label>
+      <ion-input type="text" [(ngModel)]="USER$.username"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="grisClair" floating  style="margin-top: -7px;">
+        <img src="assets/imgs/passw.png" width="19" height="19" item-left/>
+        Mot de passe</ion-label>
+      <ion-input type="{{type}}" name="password" [(ngModel)]="USER$.password"
+                 required  pattern=".{4,10}">
+      </ion-input>
+       <p *ngIf="!showPass" item-right  (click)="showPassword()" style="margin-top: 20px;">
+        <ion-icon name="eye" style="font-size: 2em;position:relative;z-index: 10000" ></ion-icon>
+      </p>
+      <p *ngIf="showPass" item-right (click)="showPassword()"  style="margin-top: 20px;">
+        <ion-icon name="eye-off" style="font-size: 2em;position:relative;z-index: 10000" ></ion-icon>
+      </p>
+    </ion-item><br>
+    <button (click)="goToSeConnecter(USER$)" ion-button  color="rougeC"    class="shadow"
+            style="border-radius: 30px;  background-image: linear-gradient(to left, #cd4f48 , #7b2011);
+    padding-left:35px;padding-right: 35px;font-family: Leelawadee ;text-transform: inherit;
+    padding-top: 25px;padding-bottom: 25px;font-size: 18px;">Se connecter</button>
+  </ion-list>
+
+
+    <ion-footer text-center style="padding:15px;color:gray" (click)="goToConfigServer(USER$)"> <ion-icon name="settings"></ion-icon> Configuration serveur</ion-footer>
+ </ion-content>

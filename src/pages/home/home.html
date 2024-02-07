@@ -1,0 +1,118 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Accueil</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="logout()">
+        <ion-icon ios="ios-log-out" md="md-log-out" color="rougPrinc"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <img src="assets/imgs/acc.jpeg" />
+  <ion-grid>
+    <ion-row>
+      <ion-col col-6>
+        <ion-card (click)="goToProduits()">
+          <ion-card-content text-center>
+            <ion-card-title>
+              <ion-icon name="barcode" class="redIcon"  ></ion-icon>
+            </ion-card-title>
+            <p>Produits</p>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col col-6>
+        <ion-card (click)="goToStock()">
+          <ion-card-content text-center>
+            <ion-card-title>
+              <img src="assets/imgs/stt.png"   style="width: inherit !important;text-align: center;display: inline-block;"  />
+            </ion-card-title>
+            <p  style="margin-top: -8px" > Stock </p>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-6>
+        <ion-card (click)="goToDevis()" >
+          <ion-card-content text-center>
+            <ion-card-title>
+              <ion-icon name="checkbox-outline" class="redIcon"  ></ion-icon>
+            </ion-card-title>
+            <p>Proformas</p>
+          </ion-card-content>
+        </ion-card>
+
+      </ion-col>
+      <ion-col col-6>
+        <ion-card (click)="goToCommandes()">
+          <ion-card-content text-center>
+            <ion-card-title  >
+              <ion-icon name="clipboard" class="redIcon"  ></ion-icon>
+            </ion-card-title>
+            <p>Commandes</p>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-6>
+        <ion-card (click)="goToLivraisonBon()">
+          <ion-card-content text-center>
+            <ion-card-title>
+              <ion-icon name="cart" class="redIcon"  ></ion-icon>
+            </ion-card-title>
+            <p>Bons livraison</p>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col col-6>
+        <ion-card (click)="goToFactureVente()">
+          <ion-card-content text-center>
+            <ion-card-title>
+              <img src="assets/imgs/vente.png" style="width: inherit !important;text-align: center;display: inline-block;" />
+            </ion-card-title>
+            <p style="margin-top: -8px;"> Factures de vente  </p>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-6>
+        <ion-card (click)="goToClients()">
+          <ion-card-content text-center>
+            <ion-card-title  >
+              <ion-icon name="people" class="redIcon"  ></ion-icon>
+            </ion-card-title>
+            <p>Clients</p>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col col-6>
+        <ion-card (click)="goToCreance()">
+          <ion-card-content text-center>
+            <ion-card-title>
+              <ion-icon ios="logo-usd" md="logo-usd" class="redIcon" ></ion-icon>
+            </ion-card-title>
+            <p> Créance Client </p>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col col-6>
+        <ion-card (click)="goToContact()">
+          <ion-card-content text-center>
+            <ion-card-title>
+              <ion-icon name="information-circle" class="redIcon"  ></ion-icon>
+            </ion-card-title>
+            <p> Contact </p>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+      
+    </ion-row><br><br>
+  </ion-grid>
+</ion-content>

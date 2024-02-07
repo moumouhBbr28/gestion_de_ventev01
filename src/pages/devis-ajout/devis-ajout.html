@@ -1,0 +1,95 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Ajouter une proforma</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+  <h2 text-center class="redIcon">Proforma <b>N°{{ devis_aj.NUMBON }}</b></h2>
+
+  <ion-list>
+    <ion-item>
+      <div *ngFor="let item of lesmagasins">
+        <p> <b>Magasin: </b>{{item.MAGASIN}}</p>
+        <p></p>
+      </div>
+    </ion-item>
+    <ion-item>
+      <ion-label  floating> Date de bon *</ion-label>
+      <ion-datetime  [(ngModel)]="devis_aj.DATEBON"   displayFormat="DD/MM/YYYY"   pickerFormat="DD/MM/YYYY"
+                     doneText="OK" cancelText="Annuler"></ion-datetime>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Code client * </ion-label>
+      <ionic-selectable item-content searchPlaceholder="Code client.." [(ngModel)]="devis_aj.CLIENT" [items]="clients"
+        itemValueField="C_CLIENT" itemTextField="C_CLIENT" [shouldStoreItemValue]="true" (onClose)="onClose($event)"
+        (onClear)="onClear($event)" (onChange)="getTypeVenteClient(devis_aj.CLIENT)" [canSearch]="true"
+        [hasInfiniteScroll]="true" (onInfiniteScroll)="loadMore($event)" (onSearch)="search_php($event)">
+        <ng-template ionicSelectableSearchFailTemplate>
+          <div padding>
+            Pas de clients
+          </div>
+
+        </ng-template>
+      </ionic-selectable>
+
+
+    </ion-item>
+
+    <ion-item>
+
+      <ion-label floating> Nom client * </ion-label>
+      <ionic-selectable item-content searchPlaceholder="Nom client.." [(ngModel)]="devis_aj.CLIENT" [items]="clients"
+        itemValueField="C_CLIENT" itemTextField="D_CLIENT" [shouldStoreItemValue]="true" (onClose)="onClose($event)"
+        (onClear)="onClear($event)" (onChange)="getTypeVenteClient(devis_aj.CLIENT)" [canSearch]="true"
+        [hasInfiniteScroll]="true" (onInfiniteScroll)="loadMore($event)" (onSearch)="search_php($event)">
+        <ng-template ionicSelectableSearchFailTemplate>
+          <div padding>
+            Pas de clients
+          </div>
+
+        </ng-template>
+      </ionic-selectable>
+
+
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Tarif de vente *</ion-label>
+      <ion-select [(ngModel)]="devis_aj.typevente_pardefaut">
+        <ion-option value="" selected>Aucun</ion-option>
+        <ion-option *ngFor = "let e of typevente" value="{{e.C_VENTE}}" >{{e.D_VENTE}}</ion-option>
+      </ion-select>
+    </ion-item>
+
+
+    <ion-item>
+      <ion-label floating>Mode Paie *</ion-label>
+      <ion-select [(ngModel)]="devis_aj.PAIE">
+        <ion-option value="" selected>Aucun</ion-option>
+        <ion-option *ngFor = "let e of modePayement" value="{{e.C_MODE}}" >{{e.D_MODE}}</ion-option>
+      </ion-select>
+    </ion-item>
+
+
+
+          <ion-item>
+      <ion-label floating>Commercial:</ion-label>
+      <ion-select [(ngModel)]="devis_aj.REPRES">
+        <ion-option value="" selected>Aucun</ion-option>
+        <ion-option *ngFor = "let e of REPRES" value="{{e.CODEREPRES}}" >{{e.DENOM}}</ion-option>
+      </ion-select>
+    </ion-item>
+
+  </ion-list>
+
+
+  <ion-fab right bottom>
+    <button ion-fab  (click)="saveDevis(devis_aj)" color="danger" ><ion-icon name="checkmark" ></ion-icon></button>
+  </ion-fab>
+
+</ion-content>

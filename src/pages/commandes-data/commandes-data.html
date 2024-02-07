@@ -1,0 +1,150 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Commande n°{{ numBon }}</ion-title>
+    <ion-buttons end *ngIf="mod_dev.VALIDE">
+      <button ion-button icon-only (click)="regler('CC',numBon,mod_dev.CLIENT)">
+        <ion-icon ios="ios-card" md="md-card" style="float: right;color:#aa0505;cursor: pointer;font-size: 20px;padding-right: 10px;"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+    <ion-list>
+      <ion-item style="border:none">
+        <ion-label>Commande validée: </ion-label>
+        <ion-toggle [(ngModel)]="mod_dev.VALIDE"
+         (ionChange)="confirm_valid()"></ion-toggle>
+
+
+      </ion-item>
+
+      <ion-item>
+      <ion-label floating>  N° Piece </ion-label>
+      <ion-input  [(ngModel)]="mod_dev.refPiece" type="text"></ion-input>
+
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Code client * </ion-label>
+      <ionic-selectable item-content searchPlaceholder="Code client.." [(ngModel)]="mod_dev.CLIENT" [items]="clients"
+        itemValueField="C_CLIENT" itemTextField="C_CLIENT" [shouldStoreItemValue]="true" (onClose)="onClose($event)"
+        (onClear)="onClear($event)" (onChange)="getTypeVente(mod_dev.CLIENT)" [canSearch]="true"
+        [hasInfiniteScroll]="true" (onInfiniteScroll)="loadMore($event)" (onSearch)="search_php($event)">
+        <ng-template ionicSelectableSearchFailTemplate>
+          <div padding>
+            Pas de clients
+          </div>
+
+        </ng-template>
+      </ionic-selectable>
+
+
+    </ion-item>
+
+    <ion-item>
+
+      <ion-label floating> Nom client * </ion-label>
+      <ionic-selectable item-content searchPlaceholder="Nom client.." [(ngModel)]="mod_dev.CLIENT" [items]="clients"
+        itemValueField="C_CLIENT" itemTextField="D_CLIENT" [shouldStoreItemValue]="true" (onClose)="onClose($event)"
+        (onClear)="onClear($event)" (onChange)="getTypeVente(mod_dev.CLIENT)" [canSearch]="true"
+        [hasInfiniteScroll]="true" (onInfiniteScroll)="loadMore($event)" (onSearch)="search_php($event)">
+        <ng-template ionicSelectableSearchFailTemplate>
+          <div padding>
+            Pas de clients
+          </div>
+
+        </ng-template>
+      </ionic-selectable>
+
+
+    </ion-item>
+        <ion-item>
+          <ion-label floating>
+             Date Bon * </ion-label>
+            <ion-datetime [(ngModel)]="mod_dev.DATEBON"
+                          displayFormat="DD/MM/YYYY"
+                          pickerFormat="DD/MM/YYYY"
+                          doneText="OK"
+                          cancelText="Annuler">
+            </ion-datetime>
+
+        </ion-item>
+        <ion-item>
+          <ion-label floating>
+              Tarif de vente *  </ion-label>
+              <ion-select  [(ngModel)]="mod_dev.typevente_pardefaut">
+                <ion-option  *ngFor="let t of typevente"  value="{{t.C_VENTE}}">{{t.D_VENTE}} </ion-option>
+              </ion-select>
+
+        </ion-item>
+
+        <ion-item>
+          <ion-label floating >
+              Mode Paie *  </ion-label>
+              <ion-select  [(ngModel)]="mod_dev.PAIE">
+                <ion-option *ngFor = "let element of modePayement" value="{{element.C_MODE}}" > {{element.D_MODE}}</ion-option>
+              </ion-select>
+
+        </ion-item>
+        <ion-item>
+          <ion-label floating > Commercial:    </ion-label>
+              <ion-select  [(ngModel)]="mod_dev.REPRES">
+                <ion-option *ngFor = "let element of REPRES" value="{{element.CODEREPRES}}"> {{element.DENOM}}</ion-option>
+              </ion-select>
+     </ion-item>
+
+      </ion-list>
+
+
+    <ion-row>
+      <ion-col  col-4>
+        <button  style="white-space: normal;text-transform: inherit" ion-button (click)="ajouter_des_prod_d(numBon,mod_dev.VALIDE)">
+          Ajouter un produit</button>
+
+      </ion-col>
+      <ion-col  col-4>
+        <button  style="white-space: normal;text-transform: inherit"  ion-button  (click)="ajt_remise_globle(numBon,totaux_bht,mod_dev.VALIDE)" >
+         Remises</button>
+
+      </ion-col>
+      <ion-col  col-4>
+        <button    style="white-space: normal;text-transform: inherit" color="danger" ion-button
+                 (click)="details_globale()" >
+          Détails </button>
+
+      </ion-col>
+    </ion-row>
+
+
+
+ <ion-card *ngFor="let item of data_DPRO">
+ <ion-card-header style="border-bottom:1px solid #d1d1d1;padding-bottom:2px;padding-top:8px;">
+ 	 <p  style="display:inline-block"><b>Code produit:   {{ item.C_PRODUIT }}</b></p>
+   <p style="display:inline-block;float: right"  text-right >
+ 	 	<span  (click)="supprimer(item.NUMBON,item.ORDRE,mod_dev.VALIDE)"
+             title="Supprimer" >
+            <ion-icon ios="ios-trash" md="md-trash" style="color:#aa0505;cursor: pointer;font-size: 20px;"></ion-icon></span>
+          <span (click)="editer(item.NUMBON,item.LIGNE,item.ORDRE,mod_dev.VALIDE)"
+              title="Editer">
+            <ion-icon ios="ios-create" md="md-create" style="color:#aa0505;cursor: pointer;font-size: 20px;padding-left: 4px;"></ion-icon></span>
+          <span (click)="details(item.NUMBON , item.ORDRE,item.C_PRODUIT,item.QTE,item.REMISE,item.PUHT,item.TVA)"
+              title="Détails">
+          <ion-icon ios="ios-calculator" md="md-calculator" style="color:#aa0505;cursor: pointer;font-size: 20px;padding-left: 4px;"></ion-icon>
+  </span>
+  </p>
+ </ion-card-header>
+      <ion-card-content style="padding-top: 4px;">
+ 		      <b>Nom  produit: </b> {{ item.LIGNE }} <br>
+          <b>Quantité: </b> {{ item.QTE | number:'1.0-0' }}<br>
+          <b>PUHT: </b> {{ item.PUHT | number:'4.3-3' }}<br>
+          <b>TVA(%): </b> {{ item.TVA| number:'1.0-0' }}%<br>
+          <b>Remise: </b> {{ item.REMISE | number:'1.0-0' }}%<br>
+      </ion-card-content>
+  </ion-card>
+
+  <ion-fab right bottom>
+    <button ion-fab  (click)="(mod_dev)" color="danger" ><ion-icon name="checkmark" ></ion-icon></button>
+  </ion-fab>
+</ion-content>

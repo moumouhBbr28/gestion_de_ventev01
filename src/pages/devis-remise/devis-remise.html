@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Proforma n°{{ nbon}}</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+  <h5 text-center>Appliquer une remise globale pour la proforma n°{{ nbon}}</h5>
+  <ion-list>
+    <ion-item>
+      <ion-label ><b>Totaux HT</b></ion-label><br>
+      <ion-label >{{ totaux_bht }}</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label floating><b>Remise %:</b></ion-label>
+      <ion-input  [(ngModel)]="prod_aj.remise"
+                  (ionChange)="remiseApp(prod_aj.remise)"
+                  name="prod_aj.remise"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating><b>Taux remise :</b></ion-label>
+      <ion-input  [(ngModel)]="prod_aj.taux"
+                  (ionChange)="getRemiseDepuisTaux(prod_aj.taux)"
+                   name="prod_aj.taux"></ion-input>
+    </ion-item>
+  </ion-list>
+  <button ion-button (click)="AppliquerRemise(prod_aj)" color="danger" block>Appliquer</button>
+</ion-content>

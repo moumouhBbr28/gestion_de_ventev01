@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Configuration serveur</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding >
+  <p>Entrez adresse IP de votre serveur SVP !</p>
+  <p class="gray">Par exemple: 192.168.1.200</p>
+
+  <form>
+    <ion-list>
+      <ion-item>
+        <ion-label floating>Adresse IP Serveur</ion-label>
+        <ion-input type="text" [(ngModel)]="adressip" name="adressip"></ion-input>
+      </ion-item>
+    </ion-list>
+
+    <button ion-button color="danger" block text-capitalize (click)="setInfo(adressip)"
+      style="background:#aa0505">Valider</button>   
+  </form>
+
+</ion-content>

@@ -1,0 +1,20 @@
+@font-face {
+  font-family: "TwCenMTCondensedBold";
+  src:  url("../assets/fonts/TwCenMTCondensedBold.woff") format('woff');
+}
+page-lg-accueil {
+  .background{
+    background-image: url('../assets/imgs/bg.jpg');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+  }
+
+  .scroll-content{
+    align-content: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+  }
+
+}

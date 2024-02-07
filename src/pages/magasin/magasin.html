@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Options</ion-title>
+
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+  <ion-list>
+    
+   
+    <ion-item>
+      <ion-label floating>Magasin *</ion-label>
+      <ion-select [(ngModel)]="devis_aj.refPiece" name="name" (ionChange)="setInfo(devis_aj.refPiece)">
+  
+        <ion-option *ngFor="let e of magasins" value="{{e.CODEMAGASIN}}">{{e.MAGASIN}}</ion-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+
+
+  <!-- <button ion-button color="danger" block text-capitalize (click)="setInfo(mag)"
+    style="background:#2db60e">Valider</button> -->
+</ion-content>

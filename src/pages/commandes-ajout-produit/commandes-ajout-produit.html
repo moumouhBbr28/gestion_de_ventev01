@@ -1,0 +1,120 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <div class="container">
+      <div class="titre">
+        <div class="bon">
+          <p style="font-size: 18px;font-weight: 500;">Commande n°{{ prod_aj.NUMBON}}</p>
+         
+        </div>
+        <div class="barcode">
+         
+          <p  (click)="scanBarcode()">
+            <img height="30px" src="assets/imgs/images - Copie.png">
+          </p>
+        </div>
+      </div>
+    </div>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+  <h6 text-center color="primary">Ajouter des produits </h6>
+
+  
+  <div *ngIf="scannedData">
+
+    <div hidden>
+      <ion-item>
+        <ion-input [(ngModel)]="prod_aj.LIGNE" (onChange)="getPuhtProd(prod_aj.LIGNE,prod_aj.qte,prod_aj.remise)"
+          value="{{ EQUIV }}"></ion-input>
+      </ion-item>
+    </div>
+  </div>
+
+  <ion-list>
+    <ion-item>
+      <ion-label floating> Code produit * </ion-label>
+      <ionic-selectable item-content searchPlaceholder="Code produit.." [(ngModel)]="prod_aj.LIGNE" [items]="produits"
+        itemValueField="C_PRODUIT" itemTextField="C_PRODUIT" [canSearch]="true" [shouldStoreItemValue]="true"
+        (onChange)="getPuhtProd(prod_aj.LIGNE,prod_aj.qte,prod_aj.remise)" [canSearch]="true" [hasInfiniteScroll]="true"
+        (onInfiniteScroll)="loadMore($event)" (onSearch)="search_php($event)" (onClose)="onClose($event)"
+        (onClear)="onClear($event)" >
+        <ng-template ionicSelectableSearchFailTemplate>
+          <div padding>
+            Pas de produit
+          </div>
+
+        </ng-template>
+
+      </ionic-selectable>
+    </ion-item>
+      <ion-item>
+
+        <ion-label floating> Designation produit * </ion-label>
+        <ionic-selectable item-content searchPlaceholder="Designation.." [(ngModel)]="prod_aj.LIGNE" [items]="produits"
+          itemValueField="C_PRODUIT" itemTextField="D1_PROD" [shouldStoreItemValue]="true" (onClose)="onClose($event)"
+          (onClear)="onClear($event)" (onChange)="getPuhtProd(prod_aj.LIGNE,prod_aj.qte,prod_aj.remise)"
+          [canSearch]="true" [hasInfiniteScroll]="true" (onInfiniteScroll)="loadMore($event)"
+          (onSearch)="search_php($event)">
+          <ng-template ionicSelectableSearchFailTemplate>
+            <div padding>
+              Pas de produit
+            </div>
+  
+          </ng-template>
+        </ionic-selectable>
+  
+  
+      </ion-item>
+    <ion-item>
+        <ion-label ><b>Quantité *:</b></ion-label>
+        <ion-input type="number"  min="1" [(ngModel)]="prod_aj.qte" *ngIf="prod_aj.LIGNE!=null"
+
+        (click)="getPuhtProd(prod_aj.LIGNE,prod_aj.qte,prod_aj.remise)"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label><b>Prix de vente:</b></ion-label><br>
+      <ion-label>{{prod_aj.PUHT_formate }}</ion-label>
+    </ion-item>
+    <ion-item>
+        <ion-label><b>Total BRUT HT:</b></ion-label><br>
+        <ion-label>{{ prod_aj.totalHt }}</ion-label>
+    </ion-item>
+    <ion-item>
+        <ion-label><b>Total NET HT:</b></ion-label><br>
+        <ion-label >{{prod_aj.totalNetHt}}</ion-label>
+
+    </ion-item>
+    <ion-item>
+      <ion-label><b>TVA :</b></ion-label><br>
+      <ion-label>{{prod_aj.TVA }}%</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label><b>Taux TVA :</b></ion-label><br>
+      <ion-label>{{prod_aj.taux_tva}}</ion-label>
+    </ion-item>
+    <ion-item>
+        <ion-label><b>Total TTC:</b></ion-label><br><br>
+        <ion-label >{{prod_aj.totalTTC}}</ion-label>
+
+    </ion-item>
+    <ion-item>
+        <ion-label><b>Remise %:</b></ion-label>
+        <ion-input  [(ngModel)]="prod_aj.remise"
+                (ionChange)="getPuhtProd(prod_aj.LIGNE,prod_aj.qte,prod_aj.remise)"
+                    name="prod_aj.remise"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label><b>Taux remise :</b></ion-label>
+        <ion-label> {{prod_aj.tauxRemise}}
+              </ion-label>
+    </ion-item>
+</ion-list>
+
+
+  <ion-fab right bottom>
+    <button ion-fab  (click)="ajouterdetails(prod_aj)" color="danger" ><ion-icon name="checkmark" ></ion-icon></button>
+  </ion-fab>
+</ion-content>

@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Catalogue produits</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-list *ngIf="suc != false">
+    <ion-item>
+      <ion-label  floating>Recherche ...</ion-label>
+      <ion-input type="text" [(ngModel)]="query" (ionChange)="search_php(query)"></ion-input>
+    </ion-item>
+  </ion-list>
+  <div *ngIf="searchMode">
+    <h5 *ngIf="users.length==0" text-center class="redIcon"> <br>Désolé ! Pas de produits pour <b>{{ query }}</b></h5>
+  </div>
+ 
+
+  <ion-card *ngFor="let item of users">
+      <br><h2 text-center style="color:#aa0505;font-weight: bold"> {{ item.D1_PROD }}</h2>
+      <img *ngIf="item.PHOTO" src="data:image/bmp;base64,{{getImageUrl(item.PHOTO)}}" />
+
+      <ion-card-content>
+        <b>Code: </b>{{item.C_PRODUIT}}<br>
+        <b>Description: </b>   {{ item.D1_PROD }} {{ item.D2_PROD }}<br>
+        <b>Famille: </b> {{ item.D_FAMIL }} ({{ item.FAMILLE }})<br>
+        <b>Prix HT : </b>  {{ item.P_VENT2HT | number:'4.3-3' }}<br>
+        <b>TVA: </b>   {{ item.TVA | number:'1.0-0' }}%<br>
+        <b>Prix TTC : </b>  {{ item.PRIX_TTC | number:'4.3-3' }}
+      </ion-card-content>
+
+  </ion-card>
+  <ion-infinite-scroll (ionInfinite)="loadMore($event)"  *ngIf="hasData" >
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Chargement de données en cours..." *ngIf="hasData" ></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>
+ 

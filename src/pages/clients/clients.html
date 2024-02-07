@@ -1,0 +1,53 @@
+ <ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Clients</ion-title>
+
+
+
+
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-list *ngIf="suc != false">
+    <ion-item>
+      <ion-label  floating>Recherche ...</ion-label>
+      <ion-input type="text" [(ngModel)]="query" (ionChange)="search_php(query)"></ion-input>
+    </ion-item>
+  </ion-list>
+  <div *ngIf="searchMode">
+    <h5 *ngIf="users.length==0" text-center class="redIcon"> <br>Désolé ! Pas de clients pour <b>{{ query }}</b></h5>
+  </div>
+ 
+
+ <ion-list>
+  <ion-item-sliding *ngFor="let item of users">
+    <ion-item>
+      <ion-avatar item-start>
+        <ion-icon
+      ios="ios-person" md="md-contact" item-start style="color:#aa0505;font-size:30px;"></ion-icon>
+      </ion-avatar>
+  <span (click)="goToFicheClient(item.C_CLIENT)" style="cursor: pointer;" >
+      <h2>{{item.D_CLIENT}}<br></h2>
+      <span style="font-size: 12px;color:#c8c7cc;">{{ item.C_CLIENT }}</span>
+  </span>
+
+
+    </ion-item>
+    
+  </ion-item-sliding>
+</ion-list>
+
+
+
+  <ion-infinite-scroll (ionInfinite)="loadMore($event)"  *ngIf="hasData" >
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Chargement de données en cours..." *ngIf="hasData" ></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
+  <ion-fab right bottom>
+    <button ion-fab  (click)="beforeAjout()" color="danger">  <ion-icon ios="ios-person-add" md="md-person-add"></ion-icon></button>
+  </ion-fab>
+</ion-content>

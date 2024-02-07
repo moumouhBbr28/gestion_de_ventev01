@@ -1,0 +1,65 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Gestion de stock</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  
+  <!-- <p class="erreur-msg" *ngIf="hasData==0">
+    <ion-icon ios="ios-warning" md="md-warning" color="danger" class="icon-err"></ion-icon> Vous n'avez pas de produits
+    en stock !
+  </p> -->
+  <ion-list *ngIf="suc != false">
+    <ion-item>
+      <ion-label floating>Recherche ...</ion-label>
+      <ion-input type="text" [(ngModel)]="query" (ionChange)="search_php(query)"></ion-input>
+    </ion-item>
+  </ion-list>
+  <div *ngIf="searchMode">
+    <h5 *ngIf="users.length==0" text-center class="redIcon"> <br>Désolé ! Pas de produits en stock pour <b>{{ query
+        }}</b></h5>
+  </div>
+
+  <ion-card *ngFor="let item of users">
+    <br>
+    <h2 text-center style="color:#aa0505;font-weight: bold"> {{ item.D1_PROD }}</h2>
+    <img *ngIf="item.PHOTO" src="data:image/bmp;base64,{{getImageUrl(item.PHOTO)}}" />
+
+    <ion-card-content>
+      <ion-grid>
+        <ion-row>
+          <ion-col col-6><b>Code: </b>{{item.C_PRODUIT}}</ion-col>
+          <ion-col col-6 text-right>
+            <ion-badge
+              [ngClass]="{'red-background':item.Q_STOCK <= 10,'yellow-background':item.Q_STOCK > 10 ,'green-background':item.Q_STOCK >= 20}">
+              Qte: {{ item.Q_STOCK | number:'1.0-0' }}
+            </ion-badge>
+          </ion-col>
+        </ion-row>
+        <hr>
+        <ion-row>
+          <ion-col col-12>
+            <b>Description: </b> {{ item.D1_PROD }} {{ item.D2_PROD }}<br>
+            <b>Famille: </b> {{ item.D_FAMIL }} ({{ item.FAMILLE }})<br>
+            <b>Magasin: </b> {{ item.MAGASIN }} ({{ item.CODEMAGASIN }})<br>
+            <b>Prix HT : </b> {{ item.P_VENT2HT | number:'4.3-3' }}<br>
+            <b>TVA: </b> {{ item.TVA | number:'1.0-0' }}%<br>
+            <b>Prix TTC : </b> {{ item.PRIX_TTC | number:'4.3-3' }}
+
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+    </ion-card-content>
+
+  </ion-card>
+  <ion-infinite-scroll (ionInfinite)="loadMore($event)" *ngIf="hasData">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Chargement de données en cours..."
+      *ngIf="hasData"></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
+</ion-content>

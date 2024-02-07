@@ -1,0 +1,67 @@
+<ion-content padding>
+  <h1 style="color: #aa0505;font-family: TwCenMTCondensedBold ;font-size: 38px;"> Inscription  </h1>
+  <h4 style="color: #cd4f48;font-family: Leelawadee ;font-size: 16px;margin-top: -15px;font-weight: bold"> Créer un compte  </h4>
+  <ion-list>
+    <ion-item style="border-top:none" >
+      <ion-label color="grisClair" floating>
+        <img src="assets/imgs/user.png" width="19" height="19" />
+        Votre nom d'utilisateur
+      </ion-label>
+      <ion-input type="text" name="register_data.username"   [(ngModel)]="register_data.username"   ></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="grisClair" floating  >
+        <img src="assets/imgs/tel.png" width="19" height="19"/>
+        Votre télephone
+      </ion-label>
+      <ion-input type="text" name="register_data.tel" [(ngModel)]="register_data.tel"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="grisClair" floating   >
+        <img src="assets/imgs/mail.png" width="19" height="20"/>
+        Votre email
+      </ion-label>
+      <ion-input type="text" name="register_data.email" [(ngModel)]="register_data.email"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="grisClair" floating  style="margin-top: -7px;">
+        <img src="assets/imgs/passw.png" width="19" height="19" item-left/>
+        Mot de passe</ion-label>
+      <ion-input type="{{type}}" name="register_data.password" [(ngModel)]="register_data.password"
+                 required  pattern=".{4,10}">
+      </ion-input>
+      <p *ngIf="!showPass" item-right  (click)="showPassword()" style="margin-top: 20px;">
+        <ion-icon name="eye" style="font-size: 2em;" ></ion-icon>
+      </p>
+      <p *ngIf="showPass" item-right (click)="showPassword()"  style="margin-top: 20px;">
+        <ion-icon name="eye-off" style="font-size: 2em;" ></ion-icon>
+      </p>
+    </ion-item>
+    <ion-item>
+      <ion-label color="grisClair" floating  style="margin-top: -7px;">
+        <img src="assets/imgs/passw.png" width="19" height="19" item-left/>
+        Confirmez le mot de passe</ion-label>
+      <ion-input type="{{type2}}" name="register_data.password2" [(ngModel)]="register_data.password2"
+                 required  pattern=".{4,10}">
+      </ion-input>
+      <p *ngIf="!showPass2" item-right  (click)="showPassword2()" style="margin-top: 20px;">
+        <ion-icon name="eye"  style="font-size: 2em;position:relative;z-index: 10000" ></ion-icon>
+      </p>
+      <p *ngIf="showPass2" item-right (click)="showPassword2()"  style="margin-top: 20px;">
+        <ion-icon name="eye-off"  style="font-size: 2em;position:relative;z-index: 10000" ></ion-icon>
+      </p>
+    </ion-item>
+    <br>
+    <button (click)="inscription(register_data)" ion-button  color="rougeC"
+            class="shadow"   style="border-radius: 30px;  background-image: linear-gradient(to left, #cd4f48 , #7b2011);
+    padding-left:35px;padding-right: 35px;font-family: Leelawadee ;text-transform: inherit;
+    padding-top: 25px;padding-bottom: 25px;font-size: 18px;">
+      S'inscrire</button><br>
+    <button (click)="goToLogin()" style="background-color: transparent;color: #c74b44;text-decoration: none;
+  font-weight: normal;font-family:Leelawadee;font-size: 16px;margin-top: 10px">
+      Vous avez déja un compte ? </button>
+
+  </ion-list>
+
+      <ion-footer text-center style="padding:15px;color:gray" (click)="goToConfigServer()"> <ion-icon name="settings"></ion-icon> Configuration serveur</ion-footer>
+</ion-content>

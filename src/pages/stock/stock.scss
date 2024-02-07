@@ -1,0 +1,53 @@
+page-stock {
+  font-family: "Roboto";
+  .red-background {
+    background: #ff1100;
+  }
+
+  .yellow-background {
+    background: #ff9901;
+  }
+
+  .green-background {
+    background: #098a98;
+  }
+
+  .erreur-msg {
+    position: absolute;
+    left: 50%;
+    top: 42%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    font-size: 18px;
+    width: 400px;
+  }
+  .image-err {
+    display: none;
+  }
+
+  @media screen and (max-width: 632px) {
+    .erreur-msg {
+      position: absolute;
+    left: 50%;
+    top: 46%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+      font-size: 14px;
+      width: 270px;
+      font-weight: 500;
+    }
+    .icon-err {
+      visibility: hidden;
+     
+    }
+    .image-err {
+     
+      display: block;
+      position: absolute;
+      left: 50%;
+      top: 30%;
+      -webkit-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
+    }
+  }
+}

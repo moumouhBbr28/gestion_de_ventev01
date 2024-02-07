@@ -1,0 +1,68 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Commandes</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+
+  <ion-list *ngIf="suc != false">
+    <ion-item>
+      <ion-label floating>Recherche ...</ion-label>
+      <ion-input type="text" [(ngModel)]="query" (ionChange)="search_php(query)"></ion-input>
+    </ion-item>
+  </ion-list>
+  <div *ngIf="searchMode">
+    <h5 *ngIf="users.length==0" text-center class="redIcon"> <br>Désolé ! Pas de commandes pour <b>{{ query }}</b></h5>
+  </div>
+  <ion-card *ngFor="let item of users"   >
+    <ion-card-header style="border-bottom:1px solid #d1d1d1;padding-bottom:8px;padding-top:8px;"
+      [ngClass]="{'hasErrorSty':item.VALIDE=='NON','ValideSty':item.VALIDE=='OUI'}">
+      <b>Commande N°{{ item.NUMBON }}/{{ExerciceEnCours}}</b>
+      <a title="Modifier">
+        <ion-icon ios="ios-open" md="md-open" style="float: right;color:#aa0505;cursor: pointer;font-size: 20px;"
+          (click)="goToCmdData(item.NUMBON,item.C_CLIENT)"></ion-icon>
+      </a>
+      <span *ngIf="item.VALIDE == 'OUI'">
+        <ion-icon *ngIf="item.VALIDE == 'OUI'" ios="ios-print" md="md-print"
+          style="float: right; color:#aa0505;cursor: pointer;font-size: 20px; padding-right: 10px;"
+          (click)="generatePdf(item)"></ion-icon>
+
+        <ion-icon ios="ios-card" md="md-card"
+          style="float: right;color:#aa0505;cursor: pointer;font-size: 20px;padding-right: 10px;"
+          (click)="regler('CC',item.NUMBON,item.C_CLIENT)"></ion-icon>
+      </span>
+      <ion-icon ios="ios-repeat" md="md-repeat" (click)="convert_list(item.NUMBON,item.C_CLIENT)"
+        style="margin-right: 8px;float: right;color:#aa0505;cursor: pointer;font-size: 20px;"></ion-icon>
+
+    </ion-card-header>
+    <ion-card-content style="padding-top: 10px;cursor:pointer;"  (click)="goToCmdData(item.NUMBON,item.C_CLIENT)">
+      <b>Piéce N°: </b> {{ item.REF_PIECE }}<br>
+      <b>Code client: </b> {{ item.C_CLIENT }}<br>
+      <b>Nom client: </b> {{ item.D_CLIENT }} <br>
+      <b>Date bon: </b> {{ item.DATE_BON}}<br>
+      <hr>
+      <div text-right><b>Validé:</b> {{ item.VALIDE }}</div>
+    </ion-card-content>
+  </ion-card>
+
+
+  <!-- <ion-infinite-scroll (ionInfinite)="loadMore($event)"  *ngIf="hasData" >
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Chargement de données en cours..." *ngIf="hasData" ></ion-infinite-scroll-content>
+  </ion-infinite-scroll> -->
+
+  <ion-fab right bottom>
+    <button ion-fab (click)="goToAjoutCmd()" color="danger">
+      <ion-icon ios="ios-add" md="md-add"></ion-icon>
+    </button>
+  </ion-fab>
+
+  <!----------------------------- FORMAT DU BON DE LIVRAISON EN PDF ------------------------------->
+  <div hidden>
+    <div style="width: 210px; display: flex; justify-content: center;" id="print-wrapper">
+    </div>
+  </div>
+
+</ion-content>

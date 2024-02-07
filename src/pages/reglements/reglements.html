@@ -1,0 +1,98 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Saisie des réglements</ion-title>
+    <ion-buttons end>
+      <button (click)="details_globale();" ion-button text-center>
+        <ion-icon ios="ios-calculator" md="md-calculator"
+                  style="color:#aa0505;cursor: pointer;font-size: 18px;"></ion-icon>
+      </button>
+      <button (click)="ouvrir_piece(reg.n_piece);" ion-button text-center>
+        <ion-icon ios="ios-open" md="md-open"
+                  style="color:#aa0505;cursor: pointer;font-size: 18px"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+  <ion-list>
+    <ion-item>
+
+      <ion-label floating> <b>Type de réglement:</b></ion-label>
+      <ion-select  [(ngModel)]="reg.type_reg" disabled>
+        <ion-option *ngFor = "let element of typePAIE_list" value="{{element.C_TYPEPAIE}}"> {{element.D_TYPEPAIE}}</ion-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+
+      <ion-label floating> <b>Piéce n°:</b></ion-label>
+      <ion-input type="text" [(ngModel)]="reg.n_piece" disabled ></ion-input>
+    </ion-item>
+    <ion-item>
+
+
+      <ion-label floating>    <b>Code Client: </b></ion-label>
+      <ion-select  [(ngModel)]="reg.client_d" disabled>
+        <ion-option *ngFor = "let element of clients" value="{{element.C_CLIENT}}"> {{element.C_CLIENT}}</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+
+      <ion-label floating > <b>Client: </b></ion-label>
+      <ion-select  [(ngModel)]="reg.client_d"  disabled>
+        <ion-option *ngFor = "let element of clients" value="{{element.C_CLIENT}}"> {{element.D_CLIENT}}</ion-option>
+      </ion-select>
+    </ion-item>
+
+
+    <ion-item>
+        <ion-label floating><b>Date de réglement *</b> </ion-label>
+        <ion-datetime  [(ngModel)]="reg.date_reg"   displayFormat="DD/MM/YYYY"   pickerFormat="DD/MM/YYYY"
+                     doneText="OK" cancelText="Annuler"></ion-datetime>
+      </ion-item>
+
+    <ion-item>
+      <ion-label floating><b>Mode Paie *</b></ion-label>
+      <ion-select  [(ngModel)]="reg.mode_paie">
+        <ion-option *ngFor = "let element of modePayement" value="{{element.C_MODE}}" > {{element.D_MODE}}</ion-option>
+      </ion-select>
+    </ion-item>
+
+      <ion-item>
+        <ion-label floating><b>Compte: *</b></ion-label>
+        <ion-select  [(ngModel)]="reg.compte_s"  style="width: 100%;border: none;padding-left: 0;" >
+            <ion-option *ngFor = "let element of comptes_list" value="{{element.C_COMPTE}}" > {{element.N_COMPTE}}</ion-option>
+        </ion-select>
+
+      </ion-item>
+      <ion-item>
+        <ion-label floating><b>Montant payé: * </b></ion-label>
+        <ion-input type="text"  [(ngModel)]="reg.montn_py"></ion-input>
+      </ion-item>
+
+    <ion-item style="border:none">
+      <ion-label>Chèque accepté ? </ion-label>
+      <ion-toggle [(ngModel)]="reg.chqu_acc" color="danger"></ion-toggle>
+    </ion-item>
+
+      <ion-item *ngIf='reg.chqu_acc'>
+        <ion-label> <b>N° Chèque: </b> </ion-label>
+        <ion-input type="text"  [(ngModel)]="reg.chqu_num"></ion-input>
+      </ion-item>
+      <!--<ion-item *ngIf='reg.chqu_acc'>
+        <ion-label> <b>Montant Chèque:</b></ion-label>
+        <ion-input type="text" [(ngModel)]="reg.chqu_mont"></ion-input>
+      </ion-item>-->
+    </ion-list>
+
+  <br><br>
+  <ion-fab right bottom>
+    <button ion-fab color="danger" (click)="appliquer_reg(reg)"><ion-icon name="checkmark"  ></ion-icon></button>
+  </ion-fab>
+
+</ion-content>
